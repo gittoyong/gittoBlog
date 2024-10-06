@@ -8,11 +8,12 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import Footer from './components/footer'
 import { baseUrl } from './sitemap'
 import { themeEffect } from 'utils/themeEffect'
+import siteConfig from '../config/siteInfo'
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Next.js Portfolio Starter',
+    default: siteConfig.siteTitle,
     template: '%s | Next.js Portfolio Starter',
   },
   description: 'This is my portfolio.',
