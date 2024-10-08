@@ -40,3 +40,39 @@ pnpm dev
 ```
 
 Deploy it to the cloud with [Vercel](https://vercel.com/templates) ([Documentation](https://nextjs.org/docs/app/building-your-application/deploying)).
+
+# Commit Guidelines
+
+In this project, we clearly define commit messages to ensure that changes are easily understandable. Commits are categorized into the following two types.
+
+## 1. Blog Writing (blog: )
+
+- This category is used when creating or modifying blog content.
+- The message should follow this format:
+  ```
+  blog: [Title] - [Description of changes]
+  ```
+
+### Examples
+
+- `blog: Writing a new tech blog - Introduction to TypeScript and Vue.js`
+- `blog: Editing existing blog - Added performance optimization`
+
+## 2. Blog Development (dev: )
+
+- This category is used for developing blog features or fixing bugs.
+- The message should follow this format:
+  ```
+  dev: [Title] - [Description of changes]
+  ```
+
+### Examples
+
+- `dev: Added image optimization feature - Using Next.js Image component`
+- `dev: Modified blog layout - Implemented responsive design`
+
+## Guidelines for Writing Commit Messages
+
+- Keep messages concise and clear.
+- Strive to describe the changes adequately.
+- Start with a verb to clearly indicate the action.
