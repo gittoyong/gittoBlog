@@ -56,6 +56,7 @@ export default function RootLayout({
     >
       <head>
         <meta name="google-site-verification" content="DkRp3QRLLad16lBEfQb3v-0zfzwkoqHGKnrocNv5TQQ" />
+        <meta name="naver-site-verification" content="e18e318fd7ea9d66c56b73d79246196133e783f8" />
         <script dangerouslySetInnerHTML={{ 
           __html: `
           (${themeEffect.toString()})()
