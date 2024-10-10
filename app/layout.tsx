@@ -55,6 +55,7 @@ export default function RootLayout({
       )}
     >
       <head>
+        <meta name="google-site-verification" content="DkRp3QRLLad16lBEfQb3v-0zfzwkoqHGKnrocNv5TQQ" />
         <script dangerouslySetInnerHTML={{ 
           __html: `
           (${themeEffect.toString()})()
