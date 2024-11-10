@@ -147,7 +147,7 @@ const timeout = config.timeout ?? 3000;
 console.log(timeout); // 출력: 3000
 ```
 
-#### value || defaultValue ([Logical OR](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_OR))
+#### value || defaultValue (Logical OR)
 - 설명 : [Logical OR](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_OR)은 [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) 값에 대한 defaultValue를 설정할 수 있으며 그 외 앞의 조건이 truthy한 값은 그대로 전달됩니다.<br/>
 Logical OR이 null, undefined를 포함한 좀 더 광범위한 [Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) 값에 대해 defaultValue를 설정해 줍니다.
 - 장점 : [Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) 값 조건에 대해서 기본값을 간단하게 적용할 수 있어 가시성이 좋습니다.
@@ -172,8 +172,8 @@ console.log(number || 42);  // 출력: 42 (falsy 값인 0을 기본값으로 대
 console.log(number ?? 42);  // 출력: 0 (0은 falsy지만 null이나 undefined가 아니므로 대체되지 않음)
 ```
 
-#### value?. ([Optional Chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining))
-- 설명 : 객체 속성에 접근한 값이 null이거나 undefined인 경우 에러를 방지하고, undefined를 반환하는 코드입니다.
+#### value?. (Optional Chaining)
+- 설명 : [Optional Chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining)은 객체 속성에 접근한 값이 null이거나 undefined인 경우 에러를 방지하고, undefined를 반환하는 코드입니다.
 - 장점 : 명시적인 null 조건문 체크가 필요 없이 에러를 막을 수 있습니다.
 - 단점 : 다른 [Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) 값들에 대해 undefined로 정의하지 않으므로, 필요에 따라 다른 분기가 필요합니다. <br/>
 또한 체인이 길거나, 속성이 깊은 경우 성능적으로 차이가 미미하지만, 코드 가독성이 많이 떨어지므로 적절히 사용하는 것이 좋습니다.
