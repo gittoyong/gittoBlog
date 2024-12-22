@@ -1,0 +1,178 @@
+---
+title: "JavaScript/TypeScript 사전: Primitive number Type"
+publishedAt: "2024-12-22"
+summary: "JavaScript/TypeScript 이슈 사전 : Primitive number Type 편"
+---
+
+## 배경
+
+해당 글의 배경은 [JavaScript/TypeScript 사전: Primitive boolean Type](https://gittoblog.vercel.app/blog/dictPrimitivebooleanType)에서 확인할 수 있습니다.
+배경 내에는 TypeScript에 대한 간단한 해석과 Primitive Type 및 첫번째 타입인 boolean Type에 대한 설명글로 이루어져 있습니다.
+
+## number Type Issue
+
+#### number Type
+
+- number Type은 변수를 선언할 때, 명시적으로 'number' 타입을 정의할 수 있습니다.
+- 또한 초기값을 통해 타입 추론이 가능하지만, 명시적인 타입 선언은 코드의 가독성 및 유지보수에 도움이 됩니다.
+
+```
+let age: number = 25; // 명시적 타입 선언
+let score = 98.5;     // 타입 추론에 의해 number로 간주
+```
+
+#### number Type !== Number Type
+
+- number Type은 원시 타입을 정의한 것이고, Number 타입은 Javascript의 Number 생성자를 사용해 만든 타입으로 Object 형에 해당합니다.
+- 특별한 상황이 아닌 경우, Number를 정의하는 데 있어 Number Object 타입은 피하도록 합니다.
+
+```
+let primitiveNumber: number = 100; // 원시 타입
+let objectNumber: Number = new Number('100'); // 객체 타입 (String을 숫자로 변환하는 과정도 가능)
+```
+
+#### 숫자 변환 및 검사
+
+- `parseInt`와 `parseFloat` 함수는 문자열을 숫자로 변환하며, `isNaN` 함수는 값이 `NaN`인지 확인합니다.
+
+```
+let input: string = "123.45";
+let num: number = parseFloat(input); // 문자열을 부동소수점 숫자로 변환
+
+if (!isNaN(num)) {
+  console.log("유효한 숫자입니다.");
+} else {
+  console.log("유효하지 않은 숫자입니다.");
+}
+```
+
+#### 안전한 정수 범위
+
+- JavaScript에서 안전한 정수 범위는 `Number.MIN_SAFE_INTEGER`부터 `Number.MAX_SAFE_INTEGER`까지입니다.
+- 이 범위를 벗어나는 정수는 정확도가 보장되지 않으므로, 큰 정수를 다룰 때는 `BigInt`를 고려해야 합니다.
+
+```
+console.log(Number.MAX_SAFE_INTEGER); // 9007199254740991
+console.log(Number.MIN_SAFE_INTEGER); // -9007199254740991
+```
+
+#### 숫자 관련 Method
+
+- `number` 타입에는 다양한 Method가 있어 숫자 처리를 도와줍니다.
+- 각 Method들은 숫자의 형식을 지정하거나, 다른 진법으로 변환할 때 유용합니다.
+
+```
+let value: number = 5.6789;
+
+console.log(value.toFixed(2));       // "5.68" - 소수점 둘째 자리까지 반올림
+console.log(value.toExponential(2)); // "5.68e+0" - 지수 표기법
+console.log(value.toString(16));     // "5" - 16진수 문자열로 변환
+```
+
+#### `NaN`과 `Infinity` 처리
+
+- `NaN`(Not-a-Number)과 `Infinity`는 `number` 타입에 속하며, 연산 결과로 발생할 수 있습니다.
+- `isNaN` 함수는 값이 `NaN`인지 확인하고, `isFinite` 함수는 값이 유한한 숫자인지 확인합니다.
+
+```
+let result: number = 0 / 0; // NaN
+let infinite: number = 1 / 0; // Infinity
+
+if (isNaN(result)) {
+  console.log("결과는 NaN입니다.");
+}
+
+if (!isFinite(infinite)) {
+  console.log("무한대 값입니다.");
+}
+```
+
+#### 숫자-문자 변환
+
+- 문자열을 숫자로 변환 시, 예기치 않은 결과가 발생할 수 있습니다.
+- 변환된 숫자가 정확한 숫자형태로 변환되었는지 확인하는 절차가 필요합니다.
+
+```
+let str: string = "123abc";
+let result: number = parseInt(str); // 123 (문자 이후의 부분은 무시됨)
+
+let invalidResult: number = +str;   // NaN (문자열 전체가 숫자로 변환되지 않음)
+
+console.log(result);       // 123
+console.log(invalidResult); // NaN
+```
+
+#### 소수점 연산
+
+- JavaScript에서 소수점 연산은 부정확한 결과를 초래할 수 있습니다.
+- `toFixed` 메서드와 `parseFloat`을 조합하여 정확한 소수점 표기가 가능합니다.
+
+```
+let a: number = 0.1;
+let b: number = 0.2;
+let result: number = a + b;
+
+console.log(result); // 0.30000000000000004
+
+let fixedResult = parseFloat((a + b).toFixed(10));
+console.log(fixedResult); // 0.3
+```
+
+## Convention of boolean Type
+
+#### 초기화와 동시에 선언
+
+- 설명 : number 타입의 지정과 동시에 선언하는 방식을 지향합니다. 타입 지정과 정의를 따로할 경우, NaN 및 undefined 값에 대한 처리가 추가적으로 요구됩니다.
+
+```
+// 권장
+let total: number = 100;
+
+// 비권장 (초기화 없이 선언)
+let total: number;
+```
+
+#### 범위 유효성 판단
+
+- 설명 : number type은 값의 유효성을 특정 범위로 판단할 수 있습니다.
+
+```
+function setAge(age: number): void {
+  if (age < 0 || age > 120) {
+    throw new Error("Invalid age");
+  }
+}
+```
+
+#### 명확한 Return 타입 정의
+
+- 설명 : number 타입으로 결과가 나오는 함수는 명확하게 return 타입을 지정해 줍니다.
+
+```
+function getTotalPrice(price: number, quantity: number): number {
+  return price * quantity;
+}
+```
+
+#### 타입 가드 사용
+
+- 설명 : 런타임 상에서 number 타입을 확인하는 타입 가드를 사용합니다.
+
+```
+function isNumber(value: unknown): value is number {
+  return typeof value === 'number';
+}
+
+// 사용 예시
+let value: unknown = 42;
+if (isNumber(value)) {
+  console.log(value.toFixed(2));
+}
+```
+
+## 결론
+
+지금까지 number Type과 관련된 Convention에 대한 정리를 진행해 보았습니다.
+number 타입을 우리가 아는 정수 타입으로 숫자와 관련된 개념들과 javascript 내장 함수인 [Math](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Math) 라이브러리가 사용 가능하여, 원하는 연산과정을 구현할 수 있는 타입입니다.
+convention 적으로 number타입을 어떻게 정의하는게 좋을까 생각할 수 있는 좋은 과정이었으며, 현업 중에도 number와 관련된 이슈들은 유효성과 더불어 컴포넌트의 크기 관련해서도 나타났던 것 같습니다.
+해당 글은 여기서 작성하고 마는 것이 아닌 주기적으로 갱신할 예정입니다. number Type과 관련하여 필요한 케이스나 방식이 필요한 경우 참고해서 볼 공간이 되었으면 좋겠습니다.

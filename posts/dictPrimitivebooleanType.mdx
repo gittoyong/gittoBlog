@@ -1,7 +1,7 @@
 ---
-title: "JavsScript/TypeScript 사전: Primitive boolean Type"
+title: "JavaScript/TypeScript 사전: Primitive boolean Type"
 publishedAt: "2024-11-10"
-summary: "JavsScript/TypeScript 이슈 사전 : Primitive boolean Type 편"
+summary: "JavaScript/TypeScript 이슈 사전 : Primitive boolean Type 편"
 ---
 
 제가 처음으로 [TypeScript](https://www.typescriptlang.org/docs/handbook/intro.html)를 접하게 된 것은 약 2년여 전에 Vue2 프로젝트를 시작할 때였던 것 같습니다.
@@ -52,6 +52,7 @@ console.log(typeof(isComplete.valueOf()))
 
 - [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) 값은 조건문으로 사용할 때, false로 처리되는 값을 뜻합니다.
 - 대표적으로 '', 0, -0, NaN, null, undefined 등이 있습니다.
+
 ```
 let falsyString: string = '';
 let falsyZero: number = 0;
@@ -70,10 +71,12 @@ if(!(falsyString || falsyZero || falsyMinusZero || falsyNaN || falsyNull || fals
 ## Convention of boolean Type
 
 #### if (!value)
+
 - 설명 : [Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) 값들에 대해 조건으로 판단하는 방식입니다. if(value)로 사용하는 경우, 의도치 않은 많은 값이 조건에 통과되기 때문에 주의해서 사용해야 합니다.<br/>
-또는 if(!!value)를 통한 타입 변환을 사용하여 명시적인 표현이 가능합니다만, 가독성에 좋지 않은 특징이 있습니다.
+  또는 if(!!value)를 통한 타입 변환을 사용하여 명시적인 표현이 가능합니다만, 가독성에 좋지 않은 특징이 있습니다.
 - 장점 : 간단하고, 명확한 의도를 전달하는 경우에 적합합니다. 단순 비교문으로 성능에 크게 영향을 미치지 않습니다.
 - 단점 : [Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) 값들에 대한 구체적인 value값이 명시되지 않습니다. null, undefined와 같은 케이스에 대한 구분이 따로 필요한 경우, 해당 코드 상단에서 따로 분기를 진행해야 합니다.
+
 ```
 // 1. 기본값 설정 예제
 const getName = (name?: string) => {
@@ -111,9 +114,11 @@ const getItems = (items?: string[]) => {
 ```
 
 #### value === null || value === undefined
-- 설명 : null과 undefined에 대한 명확한 분기를 위한 코드입니다. 
+
+- 설명 : null과 undefined에 대한 명확한 분기를 위한 코드입니다.
 - 장점 : null과 undefined에 대한 명확한 처리가 가능합니다. 구체적인 value에 대한 명시가 가능합니다.
 - 단점 : "===" 연산을 통한 정확한 타입 비교를 진행하여 이론적으로는 !value 연산보단 느릴 수 있으나, 그 차이는 아주 미미합니다.
+
 ```
 if(value === null || value === undfined){
     console.log("null and undefined process")
@@ -124,9 +129,11 @@ if(!value){
 ```
 
 #### Number.isNaN
-- 설명 : NaN에 대한 명확한 분기를 위한 코드입니다. 
+
+- 설명 : NaN에 대한 명확한 분기를 위한 코드입니다.
 - 장점 : NaN에 대한 명확한 처리를 위한 코드로, 다른 숫자와 비교하는 실수 방지가 가능합니다.
 - 단점 : NaN에 대한 처리만 가능하므로, 숫자 비교 시에만 사용이 가능합니다.
+
 ```
 if(Number.isNaN(value)){
     console.log("NaN process")
@@ -137,9 +144,11 @@ if(!value){
 ```
 
 #### value ?? defaultValue (Nullish Coalescing Operator)
+
 - 설명 : [Nullish Coalescing Operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing)은 null, undefined인 경우에 대한 defaultValue를 설정할 수 있으며 그 외 [Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) 값은 그대로 선언됩니다.
 - 장점 : null, undefined에 대해서만 기본값을 적용할 수 있어, 명시적으로 로직을 구현할 수 있습니다.
 - 단점 : 이 외에 [Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) 값들에 대한 정의를 할 수 없어, 필요에 따라 다른 분기가 필요합니다.
+
 ```
 const config: Config = {};
 const timeout = config.timeout ?? 3000;
@@ -148,10 +157,12 @@ console.log(timeout); // 출력: 3000
 ```
 
 #### value || defaultValue (Logical OR)
+
 - 설명 : [Logical OR](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_OR)은 [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) 값에 대한 defaultValue를 설정할 수 있으며 그 외 앞의 조건이 truthy한 값은 그대로 전달됩니다.<br/>
-Logical OR이 null, undefined를 포함한 좀 더 광범위한 [Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) 값에 대해 defaultValue를 설정해 줍니다.
+  Logical OR이 null, undefined를 포함한 좀 더 광범위한 [Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) 값에 대해 defaultValue를 설정해 줍니다.
 - 장점 : [Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) 값 조건에 대해서 기본값을 간단하게 적용할 수 있어 가시성이 좋습니다.
 - 단점 : [Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) 값을 기본값으로 대체되어 의도치 않은 로직 상의 혼선을 줄 수 있습니다. [Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) 값으로 인한 defaultValue 정의에 대한 로직이 명확해야 합니다.
+
 ```
 // 기본 예제
 const userName = "";
@@ -173,10 +184,12 @@ console.log(number ?? 42);  // 출력: 0 (0은 falsy지만 null이나 undefined�
 ```
 
 #### value?. (Optional Chaining)
+
 - 설명 : [Optional Chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining)은 객체 속성에 접근한 값이 null이거나 undefined인 경우 에러를 방지하고, undefined를 반환하는 코드입니다.
 - 장점 : 명시적인 null 조건문 체크가 필요 없이 에러를 막을 수 있습니다.
 - 단점 : 다른 [Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) 값들에 대해 undefined로 정의하지 않으므로, 필요에 따라 다른 분기가 필요합니다. <br/>
-또한 체인이 길거나, 속성이 깊은 경우 성능적으로 차이가 미미하지만, 코드 가독성이 많이 떨어지므로 적절히 사용하는 것이 좋습니다.
+  또한 체인이 길거나, 속성이 깊은 경우 성능적으로 차이가 미미하지만, 코드 가독성이 많이 떨어지므로 적절히 사용하는 것이 좋습니다.
+
 ```
 // 1. 객체 속성 예제
 const user = {
@@ -207,6 +220,7 @@ console.log(noGreeting); // 출력: "No greeting available" (greet 함수가 없
 // 3. Optional Chaining이 깊어지는 경우 (코드 가독성 문제) => Optional Chaining 분할 및 중첩 로직 함수화로 해결
 const color = user.account?.settings?.preferences?.theme?.color ?? "defaultColor";
 ```
+
 ## 결론
 
 지금까지 boolean Type과 관련된 Convention에 대한 정리를 진행해 보았습니다.
