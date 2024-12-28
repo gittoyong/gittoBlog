@@ -7,7 +7,7 @@ summary: "JavaScript/TypeScript 이슈 사전 : Primitive number Type 편"
 ## 배경
 
 해당 글의 배경은 [JavaScript/TypeScript 사전: Primitive boolean Type](https://gittoblog.vercel.app/blog/dictPrimitivebooleanType)에서 확인할 수 있습니다.
-배경 내에는 TypeScript에 대한 간단한 해석과 Primitive Type 및 첫번째 타입인 boolean Type에 대한 설명글로 이루어져 있습니다.
+배경 내에는 TypeScript에 대한 간단한 설명과 Primitive Type 및 첫번째 타입인 boolean Type에 대한 설명글로 이루어져 있습니다.
 
 ## number Type Issue
 
@@ -18,7 +18,7 @@ summary: "JavaScript/TypeScript 이슈 사전 : Primitive number Type 편"
 
 ```
 let age: number = 25; // 명시적 타입 선언
-let score = 98.5;     // 타입 추론에 의해 number로 간주
+let score = 98.5;     // 타입 추론에 의해 number로 간주 (비추천)
 ```
 
 #### number Type !== Number Type
@@ -28,7 +28,10 @@ let score = 98.5;     // 타입 추론에 의해 number로 간주
 
 ```
 let primitiveNumber: number = 100; // 원시 타입
-let objectNumber: Number = new Number('100'); // 객체 타입 (String을 숫자로 변환하는 과정도 가능)
+let objectNumber: Number = new Number('100'); // 객체 타입
+
+// 100
+console.log(objectNumber.toString())
 ```
 
 #### 숫자 변환 및 검사
@@ -39,6 +42,7 @@ let objectNumber: Number = new Number('100'); // 객체 타입 (String을 숫자
 let input: string = "123.45";
 let num: number = parseFloat(input); // 문자열을 부동소수점 숫자로 변환
 
+// 유효한 숫자입니다.
 if (!isNaN(num)) {
   console.log("유효한 숫자입니다.");
 } else {
@@ -130,6 +134,19 @@ let total: number = 100;
 
 // 비권장 (초기화 없이 선언)
 let total: number;
+```
+
+#### 상수 정의 시, 대문자 사용
+
+- 설명 : 변하지 않는 고정값으로 사용되는 변수는 대문자로 표기 합니다. 하드코딩을 피하고, 고정으로 사용되는 숫자 값에 의미 있는 변수명을 활용합니다.
+
+```
+// 권장
+const MAX_WINDOW_WIDTH: number = 100;
+if(a >= MAX_WINDOW_WIDTH) ...
+
+// 비권장 (하드 코딩)
+if(a >= 100) ...
 ```
 
 #### 범위 유효성 판단
