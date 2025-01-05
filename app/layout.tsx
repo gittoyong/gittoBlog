@@ -1,3 +1,7 @@
+/**
+ * 전역 레이아웃을 정의하며, 페이지 전환 시에도 변경되지 않는 고정된 UI 설정 가능
+ * NavigationBar 및 Footer, SideBar와 같은 공통 UI 요소들을 레이아웃에 정의
+ */
 import './global.css'
 import type { Metadata } from 'next'
 import { GeistSans } from 'geist/font/sans'
@@ -10,16 +14,20 @@ import { baseUrl } from './sitemap'
 import { themeEffect } from 'utils/themeEffect'
 import siteConfig from '../config/siteInfo'
 
+/**
+ * SEO 및 페이지의 메타 데이터 설정
+ */
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
     default: siteConfig.siteTitle,
     template: '%s',
   },
-  description: 'This is my portfolio.',
+  description: 'Gitto, Blog, Next.js, TypeScript, JavaScript, React.js, Web Development, Programming',
+  keywords: 'Next.js, TypeScript, JavaScript, React.js, Web Development, Programming',
   openGraph: {
     title: 'My Portfolio',
-    description: 'This is my portfolio.',
+    description: 'Gitto, Blog, Next.js, TypeScript, JavaScript, React.js, Web Development, Programming',
     url: baseUrl,
     siteName: 'My Portfolio',
     locale: 'en_US',
@@ -67,6 +75,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Footer />
+          {/** 웹 성능 및 사용자 경험 태그*/}
           <Analytics />
           <SpeedInsights />
         </main>

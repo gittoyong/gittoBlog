@@ -1,3 +1,6 @@
+/**
+ * 기본적으로 루트 URL / 에 해당되는 페이지
+ */
 import { BlogPosts } from 'app/components/posts'
 
 export default function Page() {
