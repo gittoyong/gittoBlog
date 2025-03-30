@@ -26,10 +26,10 @@ export const metadata: Metadata = {
   description: 'Gitto, Blog, Next.js, TypeScript, JavaScript, React.js, Web Development, Programming',
   keywords: 'Next.js, TypeScript, JavaScript, React.js, Web Development, Programming',
   openGraph: {
-    title: 'My Portfolio',
+    title: 'Gitto Blog',
     description: 'Gitto, Blog, Next.js, TypeScript, JavaScript, React.js, Web Development, Programming',
     url: baseUrl,
-    siteName: 'My Portfolio',
+    siteName: 'Gitto Blog',
     locale: 'en_US',
     type: 'website',
   },
